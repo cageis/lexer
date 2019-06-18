@@ -9,5 +9,8 @@
             "email": "lexer@cage.is"
         }
     ],
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    }
 }
