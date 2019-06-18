@@ -1,6 +1,8 @@
 {
     "name": "cageis/lexer",
     "type": "library",
+    "description": "Used to separate the characters of a string into tokens.",
+    "license": "MIT",
     "authors": [
         {
             "name": "Jeffrey Lemay",
