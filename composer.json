@@ -1,0 +1,11 @@
+{
+    "name": "cageis/lexer",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jeffrey Lemay",
+            "email": "lexer@cage.is"
+        }
+    ],
+    "require": {}
+}
