@@ -9,8 +9,20 @@
             "email": "lexer@cage.is"
         }
     ],
-    "require": {},
+    "require": {
+        "php": "^7.3.0"
+    },
     "require-dev": {
         "phpunit/phpunit": "^7"
+    },
+    "autoload": {
+        "psr-4": {
+            "CageIs\\Lexer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\CageIs\\Lexer\\": "tests/"
+        }
     }
 }
