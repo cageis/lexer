@@ -1,0 +1,23 @@
+language: php
+
+sudo: false
+
+php:
+  - "7.2"
+  - "7.3"
+
+before_script:
+  - composer install --no-interaction --prefer-source --dev
+
+script: vendor/bin/phpunit tests/
+
+matrix:
+  allow_failures:
+    - php: hhvm
+      dist: trusty
+    - php: nightly
+  include:
+    - php: hhvm
+      dist: trusty
+  fast_finish: true
+
