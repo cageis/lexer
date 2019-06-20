@@ -34,12 +34,12 @@ class TokenPattern
 
     /**
      * @param string $segment
-     * @return string|null
+     * @return Token|null
      */
-    public function match(string $segment): ?string
+    public function match(string $segment): ?Token
     {
         preg_match("/^({$this->pattern})/{$this->getFlags()}", $segment, $matches);
-        return $matches[1] ?? null;
+        return empty($matches) ? null : new Token($this, $matches[1], strlen($matches[0]));
     }
 
     /**

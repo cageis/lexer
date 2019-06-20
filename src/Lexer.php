@@ -46,9 +46,10 @@ class Lexer
         $tokenPatterns = $this->getTokenPatterns();
         while (true) {
             foreach ($tokenPatterns as $tokenPattern) {
-                if ($match = $tokenPattern->match($this->stringPointer->getSegment())) {
-                    $this->tokenizedCollection->add(new Token($tokenPattern, $match));
-                    $this->stringPointer->forward(strlen($match));
+                if ($token = $tokenPattern->match($this->stringPointer->getSegment())) {
+                    $token->setIndex($this->stringPointer->getPointer());
+                    $this->tokenizedCollection->add($token);
+                    $this->stringPointer->forward($token->getLength());
 
                     # When the pointer moves forward and back to 0, then the
                     # entire string has been traversed.
