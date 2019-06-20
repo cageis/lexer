@@ -18,4 +18,16 @@ class TokenPatternTest extends TestCase
         $tokenPattern = new TokenPattern('\d+', 'number');
         $this->assertNull($tokenPattern->match('testing 5432'));
     }
+
+    public function testCaseInsensitiveMatchingReturnsValue()
+    {
+        $tokenPattern = new TokenPattern('AND|OR', 'logical', false);
+        $this->assertEquals('and', $tokenPattern->match('and'));
+    }
+
+    public function testCaseSensitiveMatchingReturnsNull()
+    {
+        $tokenPattern = new TokenPattern('AND|OR', 'logical');
+        $this->assertNull($tokenPattern->match('and'));
+    }
 }
