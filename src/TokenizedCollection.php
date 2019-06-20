@@ -34,4 +34,14 @@ class TokenizedCollection
     {
         return $this->tokens[$index] ?? null;
     }
+
+    public function toArray(): array
+    {
+        return array_map(function (Token $token) {
+            return [
+                'name' => $token->getTokenPattern()->getName(),
+                'match' => $token->getMatch(),
+            ];
+        }, $this->all());
+    }
 }

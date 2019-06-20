@@ -3,6 +3,7 @@
 namespace Tests\CageIs\Lexer;
 
 use CageIs\Lexer\Lexer;
+use CageIs\Lexer\LexerFactory;
 use CageIs\Lexer\TokenPattern;
 use CageIs\Lexer\StringPointer;
 use PHPUnit\Framework\TestCase;
@@ -69,5 +70,28 @@ class LexerTest extends TestCase
             $this->assertEquals($expectedName, $tokens->get($index)->getTokenPattern()->getName());
             $this->assertEquals($expectedValues[$index], $tokens->get($index)->getMatch());
         }, $expectedNames, array_keys($expectedNames));
+    }
+
+    public function testExampleFromReadMe()
+    {
+        $lexer = LexerFactory::create();
+        $tokens = $lexer->addTokenPattern(new TokenPattern('\d+', 'num'))
+            ->addTokenPattern(new TokenPattern('[a-zA-Z]+', 'alpha'))
+            ->setWhitespaceIgnore(true)
+            ->parse("hello\n123\n^&111111");
+
+        $expected = [
+            ['alpha', 'hello'],
+            ['num', '123'],
+            ['Unknown', '^'],
+            ['Unknown', '&'],
+            ['num', '111111'],
+        ];
+
+        array_map(function (array $expected, int $index) use ($tokens) {
+            [$name, $value] = $expected;
+            $this->assertEquals($value, $tokens->get($index)->getMatch());
+            $this->assertEquals($name, $tokens->get($index)->getTokenPattern()->getName());
+        }, $expected, array_keys($expected));
     }
 }
