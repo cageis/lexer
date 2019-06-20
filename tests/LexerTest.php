@@ -80,18 +80,12 @@ class LexerTest extends TestCase
             ->setWhitespaceIgnore(true)
             ->parse("hello\n123\n^&111111");
 
-        $expected = [
-            ['alpha', 'hello'],
-            ['num', '123'],
-            ['Unknown', '^'],
-            ['Unknown', '&'],
-            ['num', '111111'],
-        ];
-
-        array_map(function (array $expected, int $index) use ($tokens) {
-            [$name, $value] = $expected;
-            $this->assertEquals($value, $tokens->get($index)->getMatch());
-            $this->assertEquals($name, $tokens->get($index)->getTokenPattern()->getName());
-        }, $expected, array_keys($expected));
+        $this->assertEquals([
+            ['name' => "alpha", 'match' => "hello", 'index' => 0, 'length' => 5],
+            ['name' => "num", 'match' => "123", 'index' => 5, 'length' => 3],
+            ['name' => "Unknown", 'match' => "^", 'index' => 8, 'length' => 1],
+            ['name' => "Unknown", 'match' => "&", 'index' => 9, 'length' => 1],
+            ['name' => "num", 'match' => "111111", 'index' => 10, 'length' => 6],
+        ], $tokens->toArray());
     }
 }

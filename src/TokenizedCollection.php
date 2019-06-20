@@ -41,6 +41,8 @@ class TokenizedCollection
             return [
                 'name' => $token->getTokenPattern()->getName(),
                 'match' => $token->getMatch(),
+                'length' => $token->getLength(),
+                'index' => $token->getIndex(),
             ];
         }, $this->all());
     }

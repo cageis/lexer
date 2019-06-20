@@ -15,14 +15,26 @@ class Token
     private $tokenPattern;
 
     /**
+     * @var int
+     */
+    private $length;
+
+    /**
+     * @var int
+     */
+    private $index;
+
+    /**
      * Token constructor.
      * @param TokenPattern $tokenPattern
      * @param string $match
+     * @param int $length
      */
-    public function __construct(TokenPattern $tokenPattern, string $match)
+    public function __construct(TokenPattern $tokenPattern, string $match, int $length)
     {
         $this->match = $match;
         $this->tokenPattern = $tokenPattern;
+        $this->length = $length;
     }
 
     /**
@@ -44,4 +56,31 @@ class Token
     {
         return $this->tokenPattern;
     }
+
+    /**
+     * @return int
+     */
+    public function getLength(): int
+    {
+        return $this->length;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIndex(): int
+    {
+        return $this->index;
+    }
+
+    /**
+     * @param int $index
+     * @return self
+     */
+    public function setIndex(int $index): self
+    {
+        $this->index = $index;
+        return $this;
+    }
+
 }
